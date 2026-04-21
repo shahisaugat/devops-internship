@@ -19,7 +19,7 @@ jobs:
 
       - name: Check scripts existence
         run: |
-          if [ -f scripts/system_info.sh ]; then
+          if [ -f week1-linux/scripts/system-info.sh ]; then
             echo "Script exists"
           else
             echo "Script doesnot exist"
@@ -27,7 +27,7 @@ jobs:
           fi
 
       - name: Give executable permissions
-        run: chmod +x /scripts/*.sh
+        run: chmod +x week1-linux/scripts/*.sh
 
       - name: Run system info script
-        run: ./scripts/system_info.sh
+        run: ./week1-linux/scripts/system-info.sh
