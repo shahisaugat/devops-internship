@@ -1,0 +1,33 @@
+name: DevOps CLI
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Show directory structure
+        run: ls -R
+
+      - name: Check scripts existence
+        run: |
+          if [ -f week1-linux/scripts/system-info.sh ]; then
+            echo "Script exists"
+          else
+            echo "Script doesnot exist"
+            exit 1
+          fi
+
+      - name: Give executable permissions
+        run: chmod +x week1-linux/scripts/*.sh
+
+      - name: Run system info script
+        run: ./week1-linux/scripts/system-info.sh
