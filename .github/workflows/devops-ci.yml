@@ -1,4 +1,4 @@
-name: DevOps CLI
+name: DevOps CLI (Fail Test)
 
 on:
   push:
@@ -22,12 +22,24 @@ jobs:
           if [ -f week1-linux/scripts/system-info.sh ]; then
             echo "Script exists"
           else
-            echo "Script doesnot exist"
-            exit 1
+            echo "Script does not exist"
           fi
 
       - name: Give executable permissions
-        run: chmod +x week1-linux/scripts/*.sh
+        run: chmod +x week1-linux/scripts/*.sh || true
 
       - name: Run system info script
-        run: ./week1-linux/scripts/system-info.sh
+        run: |
+          if [ -f week1-linux/scripts/system-info.sh ]; then
+            ./week1-linux/scripts/system-info.sh
+          else
+            echo "Skipping execution"
+          fi
+
+      - name: Run CI failure test (INTENTIONAL)
+        run: |
+          echo "Triggering intentional failure for notification testing..."
+          echo "This step will fail now"
+
+          # ❌ Forced failure
+          exit 1
