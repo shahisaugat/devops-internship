@@ -42,4 +42,5 @@ jobs:
           echo "This step will fail now"
 
           # ❌ Forced failure
+          # Purposedly failed
           exit 1
