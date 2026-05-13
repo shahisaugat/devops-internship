@@ -1,4 +1,4 @@
-name: DevOps CLI (Fail Test)
+name: DevOps CLI
 
 on:
   push:
@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -22,25 +21,12 @@ jobs:
           if [ -f week1-linux/scripts/system-info.sh ]; then
             echo "Script exists"
           else
-            echo "Script does not exist"
+            echo "Script doesnot exist"
+            exit 1
           fi
 
       - name: Give executable permissions
-        run: chmod +x week1-linux/scripts/*.sh || true
+        run: chmod +x week1-linux/scripts/*.sh
 
       - name: Run system info script
-        run: |
-          if [ -f week1-linux/scripts/system-info.sh ]; then
-            ./week1-linux/scripts/system-info.sh
-          else
-            echo "Skipping execution"
-          fi
-
-      - name: Run CI failure test (INTENTIONAL)
-        run: |
-          echo "Triggering intentional failure for notification testing..."
-          echo "This step will fail now"
-
-          # ❌ Forced failure
-          # Purposedly failed
-          exit 1
+        run: ./week1-linux/scripts/system-info.sh
