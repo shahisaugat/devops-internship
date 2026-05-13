@@ -42,4 +42,5 @@ jobs:
           echo "This step will fail now"
 
           # heyForced failure
+          # known failure trigger
           exit 1
