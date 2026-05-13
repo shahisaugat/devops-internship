@@ -41,5 +41,5 @@ jobs:
           echo "Triggering intentional failure for notification testing..."
           echo "This step will fail now"
 
-          # ❌ Forced failure
+          # Forced failure
           exit 1
